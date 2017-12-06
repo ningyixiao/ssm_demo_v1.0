@@ -19,12 +19,10 @@
 #### step5: 搭建本地开发环境
 - 安装nginx
 
-    1. 这里静态资源通过nginx来处理显示，java的部分通过nginx的proxy_pass反向代理到jetty启动的端口。基本上是一个前后端分离的形式，nginx接收到前端页面的ajax请求，将其代理到jetty的端口交由后端处理，然后返回一个json类型的数据给前端页面，前端页面接收后进行数据的处理和显示。
-    
-    2. src/main/webapp/下的index.html就是用来测试项目的前端页面，需要放置在nginx的站点文件夹中。页面打开里面有三个按钮，分别测试ExampleController里面的三个方法。
-    
-    3. 大致的nginx配置如下
-  
+  1. 这里静态资源通过nginx来处理显示，java的部分通过nginx的proxy_pass反向代理到jetty启动的端口。基本上是一个前后端分离的形式，nginx接收到前端页面的ajax请求，将其代理到jetty的端口交由后端处理，然后返回一个json类型的数据给前端页面，前端页面接收后进行数据的处理和显示。   
+  2. src/main/webapp/下的index.html就是用来测试项目的前端页面，需要放置在nginx的站点文件夹中。页面打开里面有三个按钮，分别测试ExampleController里面的三个方法。    
+  3. 大致的nginx配置如下
+ 
     location /api/ {
         proxy_pass http://localhost:8081/ssm_demo/;
     }
