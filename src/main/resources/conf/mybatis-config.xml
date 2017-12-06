@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 批量设置别名 -->
+	<!-- mybatis默认支持一些别名：boolean,int,String,Date等 -->
+	<!-- 自动扫描包中的po类，自动定义别名，别名是类名(首字母大写或小写都可以,一般用小写) -->
+	<!-- 定义别名后，可以在parameterType,resultType中使用别名 -->
+	<typeAliases>
+		<package name="com.nyx.ssm_demo.domain" />
+	</typeAliases>
+</configuration>

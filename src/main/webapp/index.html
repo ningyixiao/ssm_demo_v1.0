@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>deli home</title>
+    <button id="register">注册</button>
+    <button id="login">登录</button>
+    <button id="checkToken">测试token验证</button>
+</head>
+
+<body>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+    var example = { "username": "宁一笑", "password": "123456" };
+    $(function() {
+        $("#register").click(function() {
+            $.ajax({
+                url: "http://localhost:8080/api/register",
+                type: "post",
+                data: example,
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        });
+
+        $("#login").click(function() {
+            $.ajax({
+                url: "http://localhost:8080/api/login",
+                type: "get",
+                data: example,
+                dataType: 'json',
+                success: function(res) {
+                    $.cookie("loginId", res.data.loginId);
+                    $.cookie("token", res.data.token);
+                }
+            });
+        });
+
+        $("#checkToken").click(function() {
+            $.ajax({
+                url: "http://localhost:8080/api/checkToken",
+                type: "get",
+                data: { "loginId": $.cookie("loginId"), "token": $.cookie("token") },
+                dataType: 'json',
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+
+</html>

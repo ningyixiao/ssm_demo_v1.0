@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nyx.ssm_demo.dao.ExampleDao">
+	<!-- insert,update,delete返回值: 1-成功 0-失败 -->
+	<insert id="addExample" parameterType="example">
+		insert into
+		Example(username,password) values(#{username},#{password})
+	</insert>
+	<!-- select结果为空返回null -->
+	<select id="checkExample" parameterType="example" resultType="example">
+		select id from Example where username=#{username} and
+		password=#{password}
+	</select>
+
+	<!-- public List<Example> getExampleList(); -->
+	<!-- resultType：如果返回的是一个集合，要写集合中元素的类型 -->
+	<!-- 返回一个list -->
+	<!-- <select id="getExampleList" resultType="example">
+		select * from Example
+	</select> -->
+
+	<!-- public Map<String, Object> getExampleMap(long id); -->
+	<!-- 将查询记录封装为一个Map -->
+	<!-- 返回一条记录的map；key就是列名，值就是对应的值 -->
+	<!-- <select id="getExampleMap" resultType="map">
+		select * from Example
+		where id=#{id}
+	</select> -->
+
+	<!-- @MapKey("id") -->
+	<!-- public Map<long, Example> getExampleMapList(); -->
+	<!-- 多条记录封装为一个map -->
+	<!-- @MapKey:告诉mybatis封装这个map的时候使用哪个属性作为map的key -->
+	<!-- 键是这条记录的主键，值是记录封装后的javaBean -->
+	<!-- <select id="getExampleMapList" resultType="example">
+		select * from Example
+	</select> -->
+
+	<!-- public Example getExampleByIdAndName(@Param("id")long id,@Param("name")String 
+		username); -->
+	<!-- <select id="getExampleByIdAndUsername" resultType="example">
+		select * from Example where id=#{id} and username=#{name}
+	</select> -->
+</mapper>

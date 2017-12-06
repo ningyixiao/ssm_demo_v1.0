@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 启动自动扫描 -->
+	<context:component-scan base-package="com.nyx.ssm_demo.controller" />
+	<context:component-scan base-package="com.nyx.ssm_demo.service" />
+	<context:component-scan base-package="com.nyx.ssm_demo.dao" />
+	<context:component-scan base-package="com.nyx.ssm_demo.exception" />
+	<context:component-scan base-package="com.nyx.ssm_demo.standard" />
+
+	<!-- 注册MVC注解驱动 -->
+	<mvc:annotation-driven />
+
+	<!-- 静态资源可访问的设置方式 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<!-- 不需要拦截的路径 -->
+			<mvc:exclude-mapping path="/register" />
+			<mvc:exclude-mapping path="/login" />
+			<bean class="com.nyx.ssm_demo.interceptor.ExampleLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	<!-- 参数校验功能 -->
+	<!--注册方法验证的后处理器 -->
+	<!-- 暂时只对controller的请求参数做验证，后期可以考虑对service层以及dao层的返回值做验证，并统一返回对象 -->
+	<bean
+		class="org.springframework.validation.beanvalidation.MethodValidationPostProcessor" />
+
+	<!-- 将responsebody返回前转换为json格式 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="exceptionMessageAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver"> 
+		<property name="messageConverters"> <list> Support JSON <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" 
+		/> </list> </property> </bean> -->
+
+	<!-- 配置全局的跨域请求处理 -->
+	<!-- 方便测试环境下进行前后端分离开发 -->
+	<!-- <mvc:cors> <mvc:mapping path="/**" allowed-origins="http://localhost" 
+		allowed-methods="GET,POST,PUT,DELETE" allowed-headers="" exposed-headers="" 
+		allow-credentials="false" max-age="3600" /> <mvc:mapping path="/resources/**" 
+		allowed-origins="http://domain1.com" /> </mvc:cors> -->
+
+	<!-- 配置视图解析器，可以显式设置，也可以不设置，不设置会依据SpringMVC的默认设置 -->
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix" value="/" /> <property name="suffix" value=".jsp" 
+		/> </bean> -->
+</beans>
