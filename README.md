@@ -1,12 +1,15 @@
 ### 使用说明
 #### step1: 本地先通过maven命令创建好web app项目
+
       mvn archetype:generate -DgroupId=com.nyx -DartifactId=ssm_demo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
       
+> 不新建其实也可以，那就直接进行step2，将下载的项目文件名改为自己的项目文件名，然后将其中pom.xml文件中记录的项目信息改为自己要创建的项目信息，再进行step3操作。
+
 #### step2: clone该项目到本地
 `git clone https://github.com/ningyixiao/ssm_demo_v1.0.git`
 
 #### step3: 将项目改为自己的项目
-- 将src文件夹,jetty-http.xml,jetty.xml复制到本地新建的项目中，将pom.xml中没有的部分复制
+- 将src文件夹,jetty-http.xml,jetty.xml复制到本地新建的项目中，将pom.xml中没有的部分复制，记得检测pom文件中jetty的配置信息
 - 更改src/main/java/下的目录名
 - 更改src/main/java/下的所有java文件中的package以及import的信息
 - 检测src/main/resources/下的所有配置文件，按照上两项更改来修改配置信息
@@ -33,7 +36,7 @@
 
      1. 找到mysql配置文件，修改字符集为utf8mb4
      2. 找到src/main/webapp/下的example.sql文件，先用root用户执行该文件，创建好数据库example，以及数据表Example
-     3. 给数据库example创建一个新用户，只有读和写权限，用户名和密码参照src/main/resources/下的spring-mybatis.xml里面的数据源信息
+     3. 给数据库example创建一个新用户，只有读和写权限，用户名和密码参照src/main/resources/下的spring-mybatis.xml里面的数据源信息
     
 #### step6: 运行项目
 - `mvn clean`
