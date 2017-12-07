@@ -1,7 +1,7 @@
 ### 使用说明
 #### step1: 本地先通过maven命令创建好web app项目
 
-      mvn archetype:generate -DgroupId=com.nyx -DartifactId=ssm_demo -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
+      mvn archetype:generate -DgroupId=com.aaa -DartifactId=bbb -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
       
 > 不新建其实也可以，那就直接进行step2，将下载的项目文件名改为自己的项目文件名，然后将其中pom.xml文件中记录的项目信息改为自己要创建的项目信息，再进行step3操作。
 
